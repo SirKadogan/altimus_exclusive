@@ -1,0 +1,14 @@
+.sidebar-container {
+  flex: 1;
+  min-height: 94vh;
+  background-color: green;
+}
+
+.header {
+  height: 50px;
+  background-color: blue;
+}
+
+.content {
+  background-color: purple;
+}
