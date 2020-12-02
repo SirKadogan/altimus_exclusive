@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
 import { InputText } from 'primereact/inputtext';
-import { Menu } from 'primereact/menu';
+import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -39,7 +39,7 @@ const cars = [
   },
 ];
 
-interface vehicles {
+interface Vehicles {
   plate: string;
   make: string;
   model: string;
@@ -51,7 +51,12 @@ const Dashboard: React.SFC = () => {
   const [filter, setFilter] = useState('');
 
   const renderRow = useCallback(
-    (data: string | number): JSX.Element => <>{data}</>,
+    ({ title, data }): JSX.Element => (
+      <>
+        <span className="p-column-title">{title}</span>
+        {data}
+      </>
+    ),
     [],
   );
 
@@ -73,15 +78,32 @@ const Dashboard: React.SFC = () => {
     </div>
   );
 
+  const renderActions = (rowData: Vehicles): JSX.Element => {
+    return (
+      <>
+        <Button
+          icon="pi pi-pencil"
+          className="p-button-rounded p-button-success p-mr-2"
+          onClick={() => {}}
+        />
+        <Button
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-warning"
+          onClick={() => {}}
+        />
+      </>
+    );
+  };
+
   return (
     <div className="p-grid">
       <div className={`p-col-12 ${styles.header}`} />
       <div className={`p-col-2 ${styles['sidebar-container']}`} />
       <div className={`p-col-10 ${styles.content}`}>
-        <Panel header={renderHeader}>
+        <Panel header={renderHeader} className="datatable-responsive">
           <DataTable
             value={cars}
-            className="p-datatable-responsive-demo"
+            className="p-datatable-responsive"
             paginator
             rows={10}
             globalFilter={filter}
@@ -89,32 +111,42 @@ const Dashboard: React.SFC = () => {
             <Column
               field="plate"
               header="Placa"
-              body={(value: vehicles) => renderRow(value.plate)}
+              body={(value: Vehicles) =>
+                renderRow({ title: 'Placa', data: value.plate })
+              }
             />
             <Column
               field="make"
               header="Marca"
-              body={(value: vehicles) => renderRow(value.make)}
+              body={(value: Vehicles) =>
+                renderRow({ title: 'Marca', data: value.make })
+              }
             />
             <Column
               field="model"
               header="Modelo"
-              body={(value: vehicles) => renderRow(value.model)}
+              body={(value: Vehicles) =>
+                renderRow({ title: 'Modelo', data: value.model })
+              }
             />
             <Column
               field="year"
               header="Ano"
-              body={(value: vehicles) => renderRow(value.year)}
+              body={(value: Vehicles) =>
+                renderRow({ title: 'Ano', data: value.year })
+              }
             />
             <Column
               field="mileage"
               header="Quilometragem"
-              body={(value: vehicles) => renderRow(value.mileage)}
+              body={(value: Vehicles) =>
+                renderRow({ title: 'Quilometragem', data: value.mileage })
+              }
             />
             <Column
-              rowEditor
-              headerStyle={{ width: '7rem' }}
-              bodyStyle={{ textAlign: 'center' }}
+              header="Ações"
+              body={renderActions}
+              // headerStyle={{ width: '10rem' }}
             />
           </DataTable>
         </Panel>

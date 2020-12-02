@@ -41,7 +41,7 @@
     "@typescript-eslint/no-use-before-define": ["error"],
     "jsx-a11y/label-has-associated-control": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "object-curly-newline": "off",
+    "react/jsx-curly-newline": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
