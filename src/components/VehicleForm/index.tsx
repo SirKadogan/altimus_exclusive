@@ -21,14 +21,17 @@ interface DialogProps {
   isVisible?: boolean;
   vehicle: Vehicle;
   editHandler: (editingVehicle: Vehicle) => void;
+  createHandler: (editingVehicle: Vehicle) => void;
 }
 
-const EditDialog: React.FC<DialogProps> = ({
+const VehicleForm: React.FC<DialogProps> = ({
   hideDialog,
   isVisible,
   editHandler,
+  createHandler,
   vehicle,
 }: DialogProps) => {
+  const isEdit = Object.keys(vehicle).length > 0;
   const [editingVehicle, setEditingVehicle] = useState(vehicle);
 
   const [submitted, setSubmitted] = useState(false);
@@ -45,10 +48,14 @@ const EditDialog: React.FC<DialogProps> = ({
 
   const submit = useCallback(() => {
     if (validateInputs()) {
-      editHandler(editingVehicle);
+      if (isEdit) {
+        editHandler(editingVehicle);
+      } else {
+        createHandler(editingVehicle);
+      }
     }
     setSubmitted(true);
-  }, [editingVehicle]);
+  }, [editingVehicle, isEdit]);
 
   const saveVehicleDialogFooter = (
     <>
@@ -161,4 +168,4 @@ const EditDialog: React.FC<DialogProps> = ({
   );
 };
 
-export default EditDialog;
+export default VehicleForm;

@@ -84,3 +84,7 @@ code {
     border-bottom: 1px solid var(--surface-d);
   }
 }
+
+.p-panel-title {
+  width: 100%;
+}

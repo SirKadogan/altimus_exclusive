@@ -8,7 +8,7 @@ import { Column } from 'primereact/column';
 
 // Components
 import DeleteDialog from '../../components/DeleteDialog';
-import EditDialog from '../../components/EditDialog';
+import VehicleForm from '../../components/VehicleForm';
 
 import styles from './styles.module.css';
 
@@ -61,7 +61,7 @@ const Dashboard: React.SFC = () => {
   const [vehicles, setVehicles] = useState(VEHICLES_MOCK);
   const [vehicleToDelete, setVehicleToDelete] = useState({} as Vehicles);
   const [vehicleToEdit, setVehicleToEdit] = useState({} as Vehicles);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isVehicleFormOpen, setIsVehicleFormOpen] = useState(false);
 
   const renderRow = useCallback(
     ({ title, data }): JSX.Element => (
@@ -79,13 +79,27 @@ const Dashboard: React.SFC = () => {
   }, []);
 
   const renderHeader = (
-    <div className="table-header">
+    <div
+      className="table-header"
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
           type="search"
           onInput={e => handleSearch(e, setFilter)}
           placeholder="Pesquisar.."
+        />
+      </span>
+      <span className="p-input-icon-left">
+        <Button
+          label="Novo"
+          icon="pi pi-plus"
+          onClick={() => setIsVehicleFormOpen(true)}
         />
       </span>
     </div>
@@ -106,12 +120,20 @@ const Dashboard: React.SFC = () => {
 
       if (index >= 0) {
         editedList[index] = currentEdit;
-        setIsEditing(false);
+        setIsVehicleFormOpen(false);
         setVehicleToDelete({} as Vehicles);
         setVehicles(editedList);
       }
     },
     [vehicles, vehicleToEdit],
+  );
+
+  const confirmCreate = useCallback(
+    newVehicle => {
+      setIsVehicleFormOpen(false);
+      setVehicles([newVehicle, ...vehicles]);
+    },
+    [vehicles],
   );
 
   const renderActions = (rowData: Vehicles): JSX.Element => {
@@ -121,7 +143,7 @@ const Dashboard: React.SFC = () => {
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success p-mr-2"
           onClick={() => {
-            setIsEditing(true);
+            setIsVehicleFormOpen(true);
             setVehicleToEdit(rowData);
           }}
         />
@@ -142,13 +164,14 @@ const Dashboard: React.SFC = () => {
         isVisible={Object.keys(vehicleToDelete).length > 0}
         hideDialog={() => setVehicleToDelete({} as Vehicles)}
       />
-      {isEditing && (
-        <EditDialog
+      {isVehicleFormOpen && (
+        <VehicleForm
+          createHandler={confirmCreate}
           editHandler={confirmEdit}
           vehicle={vehicleToEdit}
-          isVisible={Object.keys(vehicleToEdit).length > 0}
+          isVisible={isVehicleFormOpen}
           hideDialog={() => {
-            setIsEditing(false);
+            setIsVehicleFormOpen(false);
             setVehicleToEdit({} as Vehicles);
           }}
         />
