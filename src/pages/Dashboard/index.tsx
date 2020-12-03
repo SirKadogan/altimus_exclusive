@@ -6,10 +6,14 @@ import { Panel } from 'primereact/panel';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
+// Components
+import DeleteDialog from '../../components/DeleteDialog';
+
 import styles from './styles.module.css';
 
-const cars = [
+const VEHICLES_MOCK = [
   {
+    id: '1',
     plate: 'INX-5175',
     make: 'Ford',
     model: 'Fiesta',
@@ -17,6 +21,7 @@ const cars = [
     mileage: 95000,
   },
   {
+    id: '2',
     plate: 'INX-5175',
     make: 'Ford',
     model: 'Ka',
@@ -24,13 +29,15 @@ const cars = [
     mileage: 95000,
   },
   {
-    plate: 'INX-5175',
+    id: '3',
+    plate: 'INX-5176',
     make: 'Ford',
     model: 'F10',
     year: 2010,
     mileage: 95000,
   },
   {
+    id: '4',
     plate: 'INX-5175',
     make: 'Ford',
     model: 'Nao sei',
@@ -40,6 +47,7 @@ const cars = [
 ];
 
 interface Vehicles {
+  id: string;
   plate: string;
   make: string;
   model: string;
@@ -49,6 +57,8 @@ interface Vehicles {
 
 const Dashboard: React.SFC = () => {
   const [filter, setFilter] = useState('');
+  const [vehicles, setVehicles] = useState(VEHICLES_MOCK);
+  const [vehicleToDelete, setVehicleToDelete] = useState({} as Vehicles);
 
   const renderRow = useCallback(
     ({ title, data }): JSX.Element => (
@@ -60,9 +70,9 @@ const Dashboard: React.SFC = () => {
     [],
   );
 
-  const handleSearch = useCallback(e => {
+  const handleSearch = useCallback((e, handler) => {
     const target = e.target as HTMLInputElement;
-    setFilter(target.value);
+    handler(target.value);
   }, []);
 
   const renderHeader = (
@@ -71,12 +81,20 @@ const Dashboard: React.SFC = () => {
         <i className="pi pi-search" />
         <InputText
           type="search"
-          onInput={handleSearch}
+          onInput={e => handleSearch(e, setFilter)}
           placeholder="Pesquisar.."
         />
       </span>
     </div>
   );
+
+  const confirmDeleteVehicle = useCallback(() => {
+    const filteredVehicles = vehicles.filter(
+      car => car.id !== vehicleToDelete?.id,
+    );
+    setVehicleToDelete({} as Vehicles);
+    setVehicles(filteredVehicles);
+  }, [vehicles, vehicleToDelete]);
 
   const renderActions = (rowData: Vehicles): JSX.Element => {
     return (
@@ -89,7 +107,7 @@ const Dashboard: React.SFC = () => {
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
-          onClick={() => {}}
+          onClick={e => setVehicleToDelete(rowData)}
         />
       </>
     );
@@ -97,12 +115,18 @@ const Dashboard: React.SFC = () => {
 
   return (
     <div className="p-grid">
+      <DeleteDialog
+        deleteHandler={confirmDeleteVehicle}
+        plate={vehicleToDelete?.plate}
+        isVisible={Object.keys(vehicleToDelete).length > 0}
+        hideDialog={() => setVehicleToDelete({} as Vehicles)}
+      />
       <div className={`p-col-12 ${styles.header}`} />
       <div className={`p-col-2 ${styles['sidebar-container']}`} />
       <div className={`p-col-10 ${styles.content}`}>
         <Panel header={renderHeader} className="datatable-responsive">
           <DataTable
-            value={cars}
+            value={vehicles}
             className="p-datatable-responsive"
             paginator
             rows={10}
