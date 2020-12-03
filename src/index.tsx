@@ -6,12 +6,12 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 import './index.css';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
+
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dashboard />
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );

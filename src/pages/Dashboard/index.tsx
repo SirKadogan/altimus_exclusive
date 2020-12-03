@@ -79,15 +79,8 @@ const Dashboard: React.SFC = () => {
   }, []);
 
   const renderHeader = (
-    <div
-      className="table-header"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      <span className="p-input-icon-left">
+    <div className="table-header p-d-flex p-flex-column p-flex-sm-row p-jc-md-between">
+      <span className="p-input-icon-left p-mt-2">
         <i className="pi pi-search" />
         <InputText
           type="search"
@@ -95,7 +88,7 @@ const Dashboard: React.SFC = () => {
           placeholder="Pesquisar.."
         />
       </span>
-      <span className="p-input-icon-left">
+      <span className="p-input-icon-left p-mt-2 ">
         <Button
           label="Novo"
           icon="pi pi-plus"
@@ -157,7 +150,7 @@ const Dashboard: React.SFC = () => {
   };
 
   return (
-    <div className="p-grid">
+    <>
       <DeleteDialog
         deleteHandler={confirmDeleteVehicle}
         plate={vehicleToDelete?.plate}
@@ -177,9 +170,7 @@ const Dashboard: React.SFC = () => {
         />
       )}
 
-      <div className={`p-col-12 ${styles.header}`} />
-      <div className={`p-col-2 ${styles['sidebar-container']}`} />
-      <div className={`p-col-10 ${styles.content}`}>
+      <div className={`p-col-12 ${styles.content}`}>
         <Panel header={renderHeader} className="datatable-responsive">
           <DataTable
             value={vehicles}
@@ -231,7 +222,7 @@ const Dashboard: React.SFC = () => {
           </DataTable>
         </Panel>
       </div>
-    </div>
+    </>
   );
 };
 
