@@ -1,0 +1,23 @@
+.menu-item-container {
+  border-radius: 3px;
+  /* border: 2px solid rgba(255, 255, 255, 0.6); */
+  margin: 3px;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.active-menu-item {
+  /* background-color: #ffd54f; */
+  /* border: 2px solid #ffd54f; */
+  color: #ffd54f;
+}
+
+.menu-item-container:hover {
+  background-color: #ffd54f;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(10px);
+  color: black;
+}
