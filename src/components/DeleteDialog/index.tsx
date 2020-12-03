@@ -36,7 +36,7 @@ const DeleteDialog: React.FC<DialogProps> = ({
     <Dialog
       visible={isVisible}
       style={{ width: '450px' }}
-      header="Confirm"
+      header="Confirmar"
       modal
       footer={deleteProductDialogFooter}
       onHide={hideDialog}

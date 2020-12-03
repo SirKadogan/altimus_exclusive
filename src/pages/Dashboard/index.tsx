@@ -8,6 +8,7 @@ import { Column } from 'primereact/column';
 
 // Components
 import DeleteDialog from '../../components/DeleteDialog';
+import EditDialog from '../../components/EditDialog';
 
 import styles from './styles.module.css';
 
@@ -59,6 +60,8 @@ const Dashboard: React.SFC = () => {
   const [filter, setFilter] = useState('');
   const [vehicles, setVehicles] = useState(VEHICLES_MOCK);
   const [vehicleToDelete, setVehicleToDelete] = useState({} as Vehicles);
+  const [vehicleToEdit, setVehicleToEdit] = useState({} as Vehicles);
+  const [isEditing, setIsEditing] = useState(false);
 
   const renderRow = useCallback(
     ({ title, data }): JSX.Element => (
@@ -96,13 +99,31 @@ const Dashboard: React.SFC = () => {
     setVehicles(filteredVehicles);
   }, [vehicles, vehicleToDelete]);
 
+  const confirmEdit = useCallback(
+    currentEdit => {
+      const index = vehicles.findIndex(car => car.id === vehicleToEdit.id);
+      const editedList = [...vehicles];
+
+      if (index >= 0) {
+        editedList[index] = currentEdit;
+        setIsEditing(false);
+        setVehicleToDelete({} as Vehicles);
+        setVehicles(editedList);
+      }
+    },
+    [vehicles, vehicleToEdit],
+  );
+
   const renderActions = (rowData: Vehicles): JSX.Element => {
     return (
       <>
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success p-mr-2"
-          onClick={() => {}}
+          onClick={() => {
+            setIsEditing(true);
+            setVehicleToEdit(rowData);
+          }}
         />
         <Button
           icon="pi pi-trash"
@@ -121,6 +142,18 @@ const Dashboard: React.SFC = () => {
         isVisible={Object.keys(vehicleToDelete).length > 0}
         hideDialog={() => setVehicleToDelete({} as Vehicles)}
       />
+      {isEditing && (
+        <EditDialog
+          editHandler={confirmEdit}
+          vehicle={vehicleToEdit}
+          isVisible={Object.keys(vehicleToEdit).length > 0}
+          hideDialog={() => {
+            setIsEditing(false);
+            setVehicleToEdit({} as Vehicles);
+          }}
+        />
+      )}
+
       <div className={`p-col-12 ${styles.header}`} />
       <div className={`p-col-2 ${styles['sidebar-container']}`} />
       <div className={`p-col-10 ${styles.content}`}>
