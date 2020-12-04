@@ -7,9 +7,13 @@ import {
   FaBookOpen,
 } from 'react-icons/fa';
 
+// Hooks
+import { useAuth } from '../../hooks/auth';
+
 import './styles.css';
 
 const CustomSidebar: React.FC = () => {
+  const { setIsAuthenticated } = useAuth();
   return (
     <div style={{ width: '100%', flex: 1 }}>
       <div
@@ -36,7 +40,13 @@ const CustomSidebar: React.FC = () => {
         </div>
         <FaChevronRight />
       </div>
-      <div className="menu-item-container">
+      <div
+        className="menu-item-container"
+        onClick={() => {
+          setIsAuthenticated(false);
+          localStorage.removeItem('customToken');
+        }}
+      >
         <div className="p-d-flex p-ai-center">
           <FaSignOutAlt className="p-mr-2" />
           <span>Sair</span>
