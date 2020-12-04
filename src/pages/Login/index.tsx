@@ -8,13 +8,19 @@ import { Button } from 'primereact/button';
 
 // Hooks
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
+
+// Services
+import { login } from '../../services/auth';
 
 import styles from './styles';
 
 const Login: React.SFC = () => {
   const history = useHistory();
   const { setIsAuthenticated } = useAuth();
+  const { showToast } = useToast();
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
 
   const handleEmail = useCallback(e => {
@@ -25,10 +31,22 @@ const Login: React.SFC = () => {
     setPassword(e.target.value);
   }, []);
 
-  const handleLogin = useCallback(() => {
+  const handleLogin = useCallback(async () => {
     localStorage.setItem('customToken', 'qzVwQBvJYWIEIxH2A91cGrVRvGCPMGZO');
-    setIsAuthenticated(true);
-    history.push('/home');
+    setLoading(true);
+    try {
+      await login({ email, password });
+      setLoading(false);
+      setIsAuthenticated(true);
+      history.push('/home');
+    } catch (err) {
+      setLoading(false);
+      showToast({
+        body: err,
+        severity: 'error',
+        title: 'Erro',
+      });
+    }
   }, [email, password]);
 
   return (
@@ -52,7 +70,11 @@ const Login: React.SFC = () => {
             </span>
           </div>
 
-          <Button label="LOGIN" onClick={handleLogin} />
+          <Button
+            label={loading ? 'Carregando..' : 'LOGIN'}
+            icon={loading ? 'pi pi-spin pi-spinner' : ''}
+            onClick={handleLogin}
+          />
         </div>
       </Card>
     </div>

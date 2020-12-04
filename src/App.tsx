@@ -4,18 +4,18 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 // Hooks
-import { AuthProvider } from './hooks/auth';
+import HookProvider from './hooks';
 
 // Router
 import Routes from './routes';
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
+    <HookProvider>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
-    </AuthProvider>
+    </HookProvider>
   );
 };
 
