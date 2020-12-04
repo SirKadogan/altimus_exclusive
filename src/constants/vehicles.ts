@@ -1,7 +1,7 @@
 export default [
   {
     id: '1',
-    plate: 'INX-5175',
+    plate: 'IBM-0908',
     make: 'Ferrari',
     model: '812 Super Fast',
     year: 2021,
@@ -10,7 +10,7 @@ export default [
   },
   {
     id: '2',
-    plate: 'INX-5175',
+    plate: 'IGK-5175',
     make: 'BMW',
     model: 'Z4',
     year: 2016,
@@ -28,7 +28,7 @@ export default [
   },
   {
     id: '4',
-    plate: 'INX-5175',
+    plate: 'TIL-4525',
     make: 'Range Rover ',
     model: 'LVB',
     year: 2020,
