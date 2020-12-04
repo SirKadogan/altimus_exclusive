@@ -11,6 +11,7 @@ import { useAuth } from '../hooks/auth';
 // Pages
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
+import About from '../pages/About';
 
 const Routes: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -22,6 +23,12 @@ const Routes: React.FC = () => {
         exact
         isAuthenticated={isAuthenticated}
         component={Dashboard}
+      />
+      <ProtectedRoute
+        path="/about"
+        exact
+        isAuthenticated={isAuthenticated}
+        component={About}
       />
       <Redirect to="/home" />
     </Switch>
