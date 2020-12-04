@@ -138,7 +138,7 @@ const Dashboard: React.SFC = () => {
         />
       )}
 
-      <div className={`p-col-12 content`}>
+      <div className="p-col-12 content">
         <h1 style={{ color: 'rgba(255,255,255,0.6)' }}>Seus veículos</h1>
         <Panel header={renderHeader} className="datatable-responsive">
           <DataTable
