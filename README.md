@@ -2,7 +2,7 @@
 
 # Altimus Exclusive - Thales Kenne
 
-Altimus Exclusive is a web dashboard with a CRUD for a vehicle list and search as well.
+Altimus Exclusive is a web dashboard with a CRUD for a vehicle list as well as a search feature.
 
 ### :cd: Technologies and Features
 
