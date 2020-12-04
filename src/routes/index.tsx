@@ -23,7 +23,7 @@ const Routes: React.FC = () => {
         isAuthenticated={isAuthenticated}
         component={Dashboard}
       />
-      <Redirect to="/login" />
+      <Redirect to="/home" />
     </Switch>
   );
 };
