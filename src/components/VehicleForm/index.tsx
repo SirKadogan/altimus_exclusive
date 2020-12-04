@@ -93,7 +93,7 @@ const VehicleForm: React.FC<DialogProps> = ({
     <Dialog
       visible={isVisible}
       style={{ width: '450px' }}
-      header="Confirmar"
+      header="Veículo"
       modal
       className="p-fluid"
       footer={saveVehicleDialogFooter}
