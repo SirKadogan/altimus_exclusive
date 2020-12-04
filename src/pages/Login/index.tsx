@@ -33,7 +33,7 @@ const Login: React.SFC = () => {
 
   return (
     <div className="full-screen" style={styles.container}>
-      <Card className="p-col-2">
+      <Card className="p-d-block p-mx-auto" style={{ width: 360 }}>
         <div className="p-fluid">
           <div className="p-field">
             <span className="p-float-label">
