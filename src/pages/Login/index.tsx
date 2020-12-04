@@ -54,7 +54,7 @@ const Login: React.SFC = () => {
 
   return (
     <div className="full-screen p-d-flex p-flex-column ">
-      <img className="p-m-5" src={Logo} alt="logo" />
+      <img className="p-m-5 p-as-center" src={Logo} alt="logo" />
       <Card className="p-d-block p-mx-auto" style={{ width: 360 }}>
         <div className="p-fluid">
           <div className="p-field">
