@@ -1,6 +1,5 @@
 .menu-item-container {
   border-radius: 3px;
-  /* border: 2px solid rgba(255, 255, 255, 0.6); */
   margin: 3px;
   display: flex;
   padding: 10px;
@@ -10,8 +9,6 @@
 }
 
 .active-menu-item {
-  /* background-color: #ffd54f; */
-  /* border: 2px solid #ffd54f; */
   color: #ffd54f;
 }
 

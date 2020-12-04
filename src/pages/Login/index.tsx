@@ -53,7 +53,7 @@ const Login: React.SFC = () => {
   }, [email, password]);
 
   return (
-    <div className="full-screen p-d-flex p-flex-column p-ai-center ">
+    <div className="full-screen p-d-flex p-flex-column ">
       <img className="p-m-5" src={Logo} alt="logo" />
       <Card className="p-d-block p-mx-auto" style={{ width: 360 }}>
         <div className="p-fluid">

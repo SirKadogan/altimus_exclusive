@@ -29,7 +29,7 @@ code {
 }
 
 .sidebar-container {
-  min-height: 94vh;
+  min-height: 100vh;
   background-color: #1e1e1e;
   width: 300px;
 }
