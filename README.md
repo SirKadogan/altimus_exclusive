@@ -8,6 +8,7 @@ Altimus Exclusive is a web dashboard with a CRUD for a vehicle list and search a
 
 - Reactjs
 - Typescript
+- Eslint/Prettier
 - Functional components
 - Hooks
 - Responsive layout for mobile and web
@@ -30,6 +31,8 @@ Altimus Exclusive is a web dashboard with a CRUD for a vehicle list and search a
 
 - I didn't add any loading indicator to simulate a search for vehicles.
 
+- The css classes and modules are a bit messy. I tried to use PrimeReact classes as much as I could and therefore I didn't really come up with a defined strategy to deal with customization.
+
 ### :computer: Instructions to run
 
 - Clone the repo
@@ -40,6 +43,6 @@ Altimus Exclusive is a web dashboard with a CRUD for a vehicle list and search a
 
 ### :camera: Preview
 
-<img src="./src/assets/preview1.png" width="500"/>
-<img src="./src/assets/preview2.png" width="500"/>
-<img src="./src/assets/preview3.png" width="500"/>
+<img src="./src/assets/preview1.png" />
+<img src="./src/assets/preview2.png" />
+<img src="./src/assets/preview3.png" />
