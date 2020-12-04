@@ -13,6 +13,9 @@ import { useToast } from '../../hooks/toast';
 // Services
 import { login } from '../../services/auth';
 
+// Assets
+import Logo from '../../assets/logo.png';
+
 import styles from './styles';
 
 const Login: React.SFC = () => {
@@ -50,7 +53,8 @@ const Login: React.SFC = () => {
   }, [email, password]);
 
   return (
-    <div className="full-screen" style={styles.container}>
+    <div className="full-screen p-d-flex p-flex-column p-ai-center ">
+      <img className="p-m-5" src={Logo} alt="logo" />
       <Card className="p-d-block p-mx-auto" style={{ width: 360 }}>
         <div className="p-fluid">
           <div className="p-field">
