@@ -1,12 +1,19 @@
 import React, { useState, useCallback } from 'react';
 
+// Libraries
+import { useHistory } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
+// Hooks
+import { useAuth } from '../../hooks/auth';
+
 import styles from './styles';
 
 const Login: React.SFC = () => {
+  const history = useHistory();
+  const { setIsAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +26,9 @@ const Login: React.SFC = () => {
   }, []);
 
   const handleLogin = useCallback(() => {
-    console.log(email, password);
+    localStorage.setItem('customToken', 'qzVwQBvJYWIEIxH2A91cGrVRvGCPMGZO');
+    setIsAuthenticated(true);
+    history.push('/home');
   }, [email, password]);
 
   return (
