@@ -10,42 +10,10 @@ import { Column } from 'primereact/column';
 import DeleteDialog from '../../components/DeleteDialog';
 import VehicleForm from '../../components/VehicleForm';
 
-import styles from './styles.module.css';
+// Constants
+import VEHICLES from '../../constants/vehicles';
 
-const VEHICLES_MOCK = [
-  {
-    id: '1',
-    plate: 'INX-5175',
-    make: 'Ford',
-    model: 'Fiesta',
-    year: 2010,
-    mileage: 95000,
-  },
-  {
-    id: '2',
-    plate: 'INX-5175',
-    make: 'Ford',
-    model: 'Ka',
-    year: 2010,
-    mileage: 95000,
-  },
-  {
-    id: '3',
-    plate: 'INX-5176',
-    make: 'Ford',
-    model: 'F10',
-    year: 2010,
-    mileage: 95000,
-  },
-  {
-    id: '4',
-    plate: 'INX-5175',
-    make: 'Ford',
-    model: 'Nao sei',
-    year: 2010,
-    mileage: 95000,
-  },
-];
+import styles from './styles.module.css';
 
 interface Vehicles {
   id: string;
@@ -54,11 +22,12 @@ interface Vehicles {
   model: string;
   year: number;
   mileage: number;
+  addons: string[];
 }
 
 const Dashboard: React.SFC = () => {
   const [filter, setFilter] = useState('');
-  const [vehicles, setVehicles] = useState(VEHICLES_MOCK);
+  const [vehicles, setVehicles] = useState(VEHICLES);
   const [vehicleToDelete, setVehicleToDelete] = useState({} as Vehicles);
   const [vehicleToEdit, setVehicleToEdit] = useState({} as Vehicles);
   const [isVehicleFormOpen, setIsVehicleFormOpen] = useState(false);

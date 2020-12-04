@@ -2,6 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import { MultiSelect } from 'primereact/multiselect';
+
+// Constants
+import ADDONS from '../../constants/addons';
 
 interface Vehicle {
   id: string;
@@ -10,6 +14,7 @@ interface Vehicle {
   model: string;
   year: number;
   mileage: number;
+  addons: string[];
 }
 
 interface LooseObject {
@@ -163,6 +168,14 @@ const VehicleForm: React.FC<DialogProps> = ({
         {submitted && !editingVehicle.mileage && (
           <small className="p-invalid">Campo obrigatório</small>
         )}
+      </div>
+      <div className="p-field">
+        <label htmlFor="name">Opcionais</label>
+        <MultiSelect
+          value={editingVehicle.addons}
+          options={ADDONS}
+          onChange={e => handleChange(e, 'addons')}
+        />
       </div>
     </Dialog>
   );
