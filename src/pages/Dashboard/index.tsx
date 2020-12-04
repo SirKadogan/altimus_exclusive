@@ -9,6 +9,7 @@ import { Column } from 'primereact/column';
 // Components
 import DeleteDialog from '../../components/DeleteDialog';
 import VehicleForm from '../../components/VehicleForm';
+import Layout from '../../components/Layout';
 
 // Constants
 import VEHICLES from '../../constants/vehicles';
@@ -119,7 +120,7 @@ const Dashboard: React.SFC = () => {
   };
 
   return (
-    <>
+    <Layout>
       <DeleteDialog
         deleteHandler={confirmDeleteVehicle}
         plate={vehicleToDelete?.plate}
@@ -191,7 +192,7 @@ const Dashboard: React.SFC = () => {
           </DataTable>
         </Panel>
       </div>
-    </>
+    </Layout>
   );
 };
 
